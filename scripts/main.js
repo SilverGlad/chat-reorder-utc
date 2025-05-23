@@ -22,19 +22,19 @@ Hooks.on("preCreateChatMessage", (msg, data, options, userId) => {
   const enabled = game.settings.get(MODULE_ID, "enabled");
   if (!enabled) return;
 
-  if (getProperty(data, `flags.${MODULE_ID}.recreated`)) return;
+  if (foundry.utils.getProperty(data, `flags.${MODULE_ID}.recreated`)) return;
 
   console.log(`[${MODULE_ID}] Interceptando mensagem`, data);
 
   const clone = foundry.utils.deepClone(data);
   const timestamp = getBrasiliaTimestamp();
-  setProperty(clone, `flags.${MODULE_ID}.recreated`, true);
-  setProperty(clone, `flags.${MODULE_ID}.timestamp`, timestamp);
+  foundry.utils.setProperty(clone, `flags.${MODULE_ID}.recreated`, true);
+  foundry.utils.setProperty(clone, `flags.${MODULE_ID}.timestamp`, timestamp);
 
   setTimeout(() => {
     console.log(`[${MODULE_ID}] Mensagem recriada com timestamp UTC-3`, timestamp);
     ChatMessage.create(clone);
   }, 200);
 
-  return false; // impede a mensagem original
+  return false; // bloqueia a original
 });
