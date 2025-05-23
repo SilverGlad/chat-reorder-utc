@@ -1,4 +1,5 @@
 {
+  "id": "chat-reorder-utc",
   "name": "chat-reorder-utc",
   "title": "Chat Reorder UTC (Simula ordenação real UTC-3)",
   "description": "Recria mensagens do chat com atraso para forçar ordenação correta baseada em UTC-3.",
